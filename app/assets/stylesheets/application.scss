@@ -16,3 +16,11 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.nav {
+  height: 42px;
+}
+
+.navbar-brand {
+  margin-top: -5px
+}
