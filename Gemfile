@@ -53,3 +53,5 @@ group :development, :test do
 end
 
 gem 'pry'
+
+gem 'devise'

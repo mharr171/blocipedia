@@ -22,5 +22,20 @@
 }
 
 .navbar-brand {
-  margin-top: -5px
+  margin-top: -5px;
+}
+
+.navbar-brand:hover {
+  border: none;
+  margin-right: 4px;
+}
+
+.nav .nav-item p {
+  color: #aaa;
+  margin: 10px 0;
+  padding-right: 10px
+}
+
+.nav .nav-link {
+  padding: 10px 5px;
 }
