@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  after_action: :send_confirmation_instructions, only: [:create]
 
   # GET /users
   # GET /users.json
