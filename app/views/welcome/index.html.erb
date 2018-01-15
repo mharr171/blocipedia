@@ -1,2 +1,35 @@
-<h1>Welcome#index</h1>
-<p>Find me in app/views/welcome/index.html.erb</p>
+<div class="jumbotron">
+  <% if current_user %>
+    <h1 class="display-3">Welcome back to Blocipedia</h1>
+  <% else %>
+    <h1 class="display-3">Welcome to Blocipedia</h1>
+  <% end %>
+  <p class="lead">Blocipedia is a site similar to Wikipedia.</p>
+  <hr class="my-4">
+  <p> This is a project I am using to learn Ruby on Rails.</p>
+  <p class="lead">
+    <%= link_to "Learn More", about_path(@wiki), class: 'btn btn-primary btn-lg' %>
+    <% if current_user %>
+    <% else %>
+      <%= link_to "Join Today", new_user_registration_path, class: 'btn btn-primary btn-lg' %>
+    <% end %>
+  </p>
+</div>
+
+<div class="row media">
+  <div class="col-md-4">
+    <span class="glyphicon glyphicon-hourglass text-center">
+    <h2 class="media-heading text-uppercase">Share your interests</h2></span>
+    <p>Blocipedia gives you a place to share your interests.</p>
+  </div>
+  <div class="col-md-4">
+    <span class="glyphicon glyphicon-bookmark text-center">
+    <h2 class="media-heading text-uppercase">Share your knowledge</h2></span>
+    <p>Blocipedia gives you a place to share your knowledge.</p>
+  </div>
+  <div class="col-md-4">
+    <span class="glyphicon glyphicon-tower text-center">
+    <h2 class="media-heading text-uppercase">Share your memes</h2></span>
+    <p>Blocipedia gives you a place to share your memes.</p>
+  </div>
+</div>
