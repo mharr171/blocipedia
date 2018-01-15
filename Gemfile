@@ -57,3 +57,5 @@ gem 'pry'
 gem 'devise'
 
 gem 'figaro', '1.0'
+
+gem 'simple_form'
