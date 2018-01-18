@@ -17,6 +17,10 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+div.container {
+  height: 100vh;
+}
+
 .nav {
   height: 42px;
 }
@@ -38,4 +42,8 @@
 
 .nav .nav-link {
   padding: 10px 5px;
+}
+
+.panel-footer {
+  margin-top: 35px;
 }
