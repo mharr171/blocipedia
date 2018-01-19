@@ -1,7 +1,9 @@
 <%= simple_form_for @wiki do |form| %>
   <%= form.input :title %>
   <%= form.input :body, class: 'form-control', id: 'wiki-body' %>
-  <%= form.label :private %>
-  <%= form.check_box :private %></br>
+  <% if policy(User).admin? || policy(User).premium? %>
+    <%= form.label :private %>
+    <%= form.check_box :private %></br>
+  <% end %>
   <%= form.submit 'Save', class: 'btn btn-success' %>
 <% end %>

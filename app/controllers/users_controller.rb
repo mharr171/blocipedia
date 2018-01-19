@@ -74,6 +74,7 @@ class UsersController < ApplicationController
   def make_self_standard
     @user = User.find(params[:id])
     @user.role_id = 1
+    make_wikis_public
     authorize @user
 
     if @user.save
@@ -116,6 +117,7 @@ class UsersController < ApplicationController
   def make_other_standard
     @user = User.find(params[:id])
     @user.role_id = 1
+    make_wikis_public
     authorize @user
 
     if @user.save
@@ -164,5 +166,15 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.fetch(:user, {})
+    end
+
+    def make_wikis_public
+      @reset_these = Wiki.where(:user_id => current_user.id )
+      @cu_id = current_user.id
+
+      @reset_these.each do |r|
+        r.private = false
+        r.update_attribute(:user_id, @cu_id)
+      end
     end
 end
