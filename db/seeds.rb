@@ -68,11 +68,15 @@ puts "\n#{User.count} users created"
     @b << "\n" + Faker::Markdown.unique.headers + ' ' + Faker::Lorem.sentence + "\n"
     @b << Faker::Lorem.unique.paragraphs(2..8)
   end
+
+  @u = users.sample
+  @t = false
+  @t = true if ( @u.role_id == 2 || @u.role_id == 3 )
   Wiki.create!(
     title:    Faker::Vehicle.unique.manufacture.downcase.titleize,
     body:     @b.join(' '),
-    private:  false,
-    user:     users.sample
+    private:  @t,
+    user:     @u
   )
   print '.'
 end

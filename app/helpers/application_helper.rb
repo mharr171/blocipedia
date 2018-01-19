@@ -1,5 +1,5 @@
 require 'redcarpet'
-
+require 'redcarpet/render_strip'
 module ApplicationHelper
 
   def markdown(text)
@@ -19,6 +19,14 @@ module ApplicationHelper
 
     renderer = Redcarpet::Render::HTML.new(options)
     markdown = Redcarpet::Markdown.new(renderer, extensions)
+
+    markdown.render(text).html_safe
+  end
+
+  def remove_markdown(text)
+
+    renderer = Redcarpet::Render::StripDown
+    markdown = Redcarpet::Markdown.new(renderer)
 
     markdown.render(text).html_safe
   end

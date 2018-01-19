@@ -6,7 +6,7 @@
       </h4>
       <small>
         <% if wiki.private == false %>
-          <%= truncate wiki.body, length: 244 %>
+          <%= remove_markdown( (truncate wiki.body, length: 244) ) %>
         <% else %>
           <p>PRIVATE CONTENT.</p>
         <% end %>
