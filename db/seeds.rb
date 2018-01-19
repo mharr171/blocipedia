@@ -63,9 +63,14 @@ puts "\n#{User.count} users created"
 
 # Create Wikis
 10.times do
+  @b = []
+  15.times do
+    @b << "\n" + Faker::Markdown.unique.headers + ' ' + Faker::Lorem.sentence + "\n"
+    @b << Faker::Lorem.unique.paragraphs(2..8)
+  end
   Wiki.create!(
     title:    Faker::Vehicle.unique.manufacture.downcase.titleize,
-    body:     Faker::Lorem.paragraphs(50).join(' '),
+    body:     @b.join(' '),
     private:  false,
     user:     users.sample
   )

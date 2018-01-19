@@ -3,9 +3,9 @@
 </div>
 <div class="row">
   <div class="col-md-8">
-    <% if policy(User).admin? || policy(User).premium? %>
+    <% if ( @wiki.private == false ) || ( policy(User).admin? || policy(User).premium? ) %>
       <h2><%= @wiki.title %></h2>
-      <p><%= @wiki.body %></p>
+      <p><%= markdown(@wiki.body) %></p>
     <% else %>
       <h2>This wiki is private</h2>
       <p>You do not have access to this wiki</p>

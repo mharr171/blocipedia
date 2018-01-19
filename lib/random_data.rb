@@ -1,3 +1,5 @@
+require 'faker'
+
 module RandomData
   def self.random_paragraphs
     paragraphs = []
@@ -42,4 +44,5 @@ module RandomData
   def self.random_email
     "#{random_word}@#{random_word}.com"
   end
+
 end
