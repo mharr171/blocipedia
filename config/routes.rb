@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   get 'wikis/destroy'
 
   devise_for :users
+  resources :users
+  # resources :users, except: [:new]
 
   resources :wikis
 

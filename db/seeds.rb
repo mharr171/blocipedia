@@ -1,4 +1,7 @@
 require 'random_data'
+['standard', 'premium', 'admin'].each do |role|
+  Role.find_or_create_by({name: role})
+end
 
 # Create My Account
 my_account = User.new(
@@ -6,6 +9,7 @@ my_account = User.new(
   email:    'mharr171.z@gmail.com',
   password: 'asdf123'
 )
+my_account.role = Role.find_by_name('admin')
 my_account.skip_confirmation!
 my_account.save!
 print '.'
@@ -16,6 +20,7 @@ member = User.new(
   email:    'member@blocipedia.com',
   password: 'asdf123'
 )
+member.role = Role.find_by_name('standard')
 member.skip_confirmation!
 member.save!
 print '.'

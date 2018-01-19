@@ -7,6 +7,8 @@
     <% end %>
   </div>
   <div class='col-md-4'>
-    <%= link_to 'Create Wiki', new_wiki_path, :class=>'btn btn-primary btn-sm' %>
+    <% if policy(@wikis).new? %>
+      <%= link_to 'Create Wiki', new_wiki_path, :class=>'btn btn-primary btn-sm' %>
+    <% end %>
   </div>
 </div>
