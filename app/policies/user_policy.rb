@@ -42,6 +42,17 @@ class UserPolicy < ApplicationPolicy
     ( user.present? && user.admin? )
   end
 
+  def make_standard?
+    true
+  end
+
+  def make_premium?
+    true
+  end
+
+  def make_admin?
+    true
+  end
   # def scope
   #   # Pundit.policy_scope!(user, record.class)
   #   Pundit.policy_scope!(user, wiki.class)

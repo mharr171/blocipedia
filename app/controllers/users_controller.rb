@@ -71,6 +71,48 @@ class UsersController < ApplicationController
     end
   end
 
+  def make_standard
+    @user = User.find(params[:id])
+    @user.role_id = 1
+    authorize @user
+
+    if @user.save
+      flash[:notice] = "You've been downgraded to standard. Your private wikis are now public."
+      redirect_to edit_user_registration_path
+    else
+      flash[:error] = "There was an error updating your account. Please try again."
+      redirect_to edit_user_registration_path
+    end
+  end
+
+  def make_premium
+    @user = User.find(params[:id])
+    @user.role_id = 2
+    authorize @user
+
+    if @user.save
+      flash[:notice] = "You've been upgraded to premium. You can now create private wikis."
+      redirect_to edit_user_registration_path
+    else
+      flash[:error] = "There was an error updating your account. Please try again."
+      redirect_to edit_user_registration_path
+    end
+  end
+
+  def make_admin
+    @user = User.find(params[:id])
+    @user.role_id = 3
+    authorize @user
+
+    if @user.save
+      flash[:notice] = "You've been upgraded to admin."
+      redirect_to edit_user_registration_path
+    else
+      flash[:error] = "There was an error updating your account. Please try again."
+      redirect_to edit_user_registration_path
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
