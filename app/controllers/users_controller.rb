@@ -71,7 +71,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def make_standard
+  def make_self_standard
     @user = User.find(params[:id])
     @user.role_id = 1
     authorize @user
@@ -85,7 +85,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def make_premium
+  def make_self_premium
     @user = User.find(params[:id])
     @user.role_id = 2
     authorize @user
@@ -99,7 +99,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def make_admin
+  def make_self_admin
     @user = User.find(params[:id])
     @user.role_id = 3
     authorize @user
@@ -110,6 +110,48 @@ class UsersController < ApplicationController
     else
       flash[:error] = "There was an error updating your account. Please try again."
       redirect_to edit_user_registration_path
+    end
+  end
+
+  def make_other_standard
+    @user = User.find(params[:id])
+    @user.role_id = 1
+    authorize @user
+
+    if @user.save
+      flash[:notice] = "The account has been downgraded to standard. This account's wikis are now public."
+      redirect_to user_path(@user)
+    else
+      flash[:error] = "There was an error updating this account. Please try again."
+      redirect_to user_path(@user)
+    end
+  end
+
+  def make_other_premium
+    @user = User.find(params[:id])
+    @user.role_id = 2
+    authorize @user
+
+    if @user.save
+      flash[:notice] = "The account has been upgraded to premium. This account can now create private wikis."
+      redirect_to user_path(@user)
+    else
+      flash[:error] = "There was an error updating this account. Please try again."
+      redirect_to user_path(@user)
+    end
+  end
+
+  def make_other_admin
+    @user = User.find(params[:id])
+    @user.role_id = 3
+    authorize @user
+
+    if @user.save
+      flash[:notice] = "The account has been upgraded to admin."
+      redirect_to user_path(@user)
+    else
+      flash[:error] = "There was an error updating this account. Please try again."
+      redirect_to user_path(@user)
     end
   end
 

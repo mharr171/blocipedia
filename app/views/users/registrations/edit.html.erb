@@ -36,10 +36,20 @@
   </div>
 <% end %>
 
-<h3>Set Role</h3>
-<%= button_to "Make Standard", make_user_standard_path(current_user), data: { confirm: "Are you sure you want to make this account standard?"}, method: :post, class: 'btn btn-info btn-sm field-link' %>
-<%= button_to "Make Premium", make_user_premium_path(current_user), data: { confirm: "Are you sure you want to make this account premium?"}, method: :post, class: 'btn btn-warning btn-sm field-link' %>
-<%= button_to "Make Admin", make_user_admin_path(current_user), data: { confirm: "Are you sure you want to make this account admin?"}, method: :post, class: 'btn btn-danger btn-sm field-link' %>
+<% if policy(User).standard? %>
+  <h3>Sign Up for Premium</h3>
+  <%= button_to "Get Premium", new_charge_path, method: :get, class: 'btn btn-primary btn-sm btn-default-width field-link' %>
+<% elsif policy(User).premium? %>
+  <h5>Unsatisfied with Premium?</h5>
+  <%= button_to "Downgrade to Standard", make_self_standard_path(current_user), data: { confirm: "Are you sure you want to make this account standard? You will not be refunded for your premium account purchase and this action cannot be undone."}, method: :post, class: 'btn btn-danger btn-sm btn-default-width field-link' %>
+<% end %>
+
+<% if policy(User).admin? %>
+  <h3>Set Role</h3>
+  <%= button_to "Make Standard", make_self_standard_path(current_user), data: { confirm: "Are you sure you want to make this account standard?"}, method: :post, class: 'btn btn-info btn-sm btn-default-width field-link' %>
+  <%= button_to "Make Premium", make_self_premium_path(current_user), data: { confirm: "Are you sure you want to make this account premium?"}, method: :post, class: 'btn btn-warning btn-sm btn-default-width field-link' %>
+  <%= button_to "Make Admin", make_self_admin_path(current_user), data: { confirm: "Are you sure you want to make this account admin?"}, method: :post, class: 'btn btn-danger btn-sm btn-default-width field-link' %>
+<% end %>
 
 <h3>Cancel my account</h3>
 

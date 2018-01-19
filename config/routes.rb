@@ -1,31 +1,22 @@
 Rails.application.routes.draw do
-  get 'wikis/create'
-
-  get 'wikis/update'
-
-  get 'wikis/show'
-
-  get 'wikis/index'
-
-  get 'wikis/new'
-
-  get 'wikis/edit'
-
-  get 'wikis/destroy'
-
   devise_for :users
   resources :users
   # resources :users, except: [:new]
 
   resources :wikis
+  resources :charges, only: [:new, :create]
 
   get 'welcome/index'
 
   get 'welcome/about'
 
-  post "/users/:id/standard" => "users#make_standard", as: "make_user_standard"
-  post "/users/:id/premium" => "users#make_premium", as: "make_user_premium"
-  post "/users/:id/admin" => "users#make_admin", as: "make_user_admin"
+  post "/users/:id/self_standard" => "users#make_self_standard", as: "make_self_standard"
+  post "/users/:id/self_premium" => "users#make_self_premium", as: "make_self_premium"
+  post "/users/:id/self_admin" => "users#make_self_admin", as: "make_self_admin"
+
+  post "/users/:id/other_standard" => "users#make_other_standard", as: "make_other_standard"
+  post "/users/:id/other_premium" => "users#make_other_premium", as: "make_other_premium"
+  post "/users/:id/other_admin" => "users#make_other_admin", as: "make_other_admin"
 
   get 'about' => 'welcome#about'
   root 'welcome#index'

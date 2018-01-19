@@ -1,0 +1,13 @@
+<h4>Premium Features</h4>
+<ul>
+  <li>Private Wikis</li>
+</ul>
+
+<h4>Price</h4>
+<p>$15</p>
+
+<h4>Stripe</h4>
+<p>All payments are processed through Stripe to ensure the safety of you data. </p>
+<%= form_tag charges_path do %>
+  <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" data-key="<%= @stripe_btn_data[:key] %>" data-amount="<%= @stripe_btn_data[:amount] %>" data-description="<%= @stripe_btn_data[:description] %>" ></script>
+<% end %>

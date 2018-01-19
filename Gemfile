@@ -63,3 +63,5 @@ gem 'simple_form'
 gem 'pundit'
 
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
+
+gem 'stripe'

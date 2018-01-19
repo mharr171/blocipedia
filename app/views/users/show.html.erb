@@ -1,6 +1,9 @@
 <p id="notice"><%= notice %></p>
 <h2><%= @user.name %></h2>
 <p>Email: <%= @user.email %></p>
-<p>Role: <%= @user.role_id %></p>
-<!-- <%= link_to 'Edit', edit_user_path(@user) %> | -->
+<p>Account Type:
+    <%= 'Standard' if @user.role_id == 1 %>
+    <%= 'Premium' if @user.role_id == 2 %>
+    <%= 'Admin' if @user.role_id == 3 %></p>
+<%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

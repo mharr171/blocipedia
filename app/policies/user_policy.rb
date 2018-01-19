@@ -6,12 +6,40 @@ class UserPolicy < ApplicationPolicy
     @other_user = other_user
   end
 
+  def verify_standard
+    if user.present?
+      user.role.name == 'standard'
+    else
+      false
+    end
+  end
+
+  def verify_premium
+    if user.present?
+      user.role.name == 'premium'
+    else
+      false
+    end
+  end
+
   def verify_admin
     if user.present?
       user.role.name == 'admin'
     else
       false
     end
+  end
+
+  def standard?
+    verify_standard
+  end
+
+  def premium?
+    verify_premium
+  end
+
+  def admin?
+    verify_admin
   end
 
   def index?
@@ -42,16 +70,28 @@ class UserPolicy < ApplicationPolicy
     ( user.present? && user.admin? )
   end
 
-  def make_standard?
+  def make_self_standard?
     true
   end
 
-  def make_premium?
+  def make_self_premium?
     true
   end
 
-  def make_admin?
+  def make_self_admin?
     true
+  end
+
+  def make_other_standard?
+    verify_admin
+  end
+
+  def make_other_premium?
+    verify_admin
+  end
+
+  def make_other_admin?
+    verify_admin
   end
   # def scope
   #   # Pundit.policy_scope!(user, record.class)

@@ -42,6 +42,13 @@
           <li class='nav-item pull-right'>
             <p>
               Hello, <strong><%= current_user.name %></strong>!
+              <% if policy(User).premium? %>
+                <span class="glyphicon glyphicon glyphicon-certificate" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Premium Account"></span>
+              <% elsif policy(User).admin? %>
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Admin Account"></span>
+              <% else %>
+
+              <% end %>
             </p>
           </li>
         <% else %>
