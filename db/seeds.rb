@@ -15,15 +15,37 @@ my_account.skip_confirmation!
 my_account.save!
 print '.'
 
-# Create Member Account
-member = User.new(
-  name:     'Member User',
-  email:    'member@blocipedia.com',
+# Create Standard Account
+standard_member = User.new(
+  name:     'Standard Account User',
+  email:    'standard@blocipedia.com',
   password: 'asdf123'
 )
-member.role = Role.find_by_name('standard')
-member.skip_confirmation!
-member.save!
+standard_member.role = Role.find_by_name('standard')
+standard_member.skip_confirmation!
+standard_member.save!
+print '.'
+
+# Create Premium Account
+premium_member = User.new(
+  name:     'Premium Account User',
+  email:    'premium@blocipedia.com',
+  password: 'asdf123'
+)
+premium_member.role = Role.find_by_name('premium')
+premium_member.skip_confirmation!
+premium_member.save!
+print '.'
+
+# Create Admin Account
+admin_member = User.new(
+  name:     'Admin Account User',
+  email:    'admin@blocipedia.com',
+  password: 'asdf123'
+)
+admin_member.role = Role.find_by_name('admin')
+admin_member.skip_confirmation!
+admin_member.save!
 print '.'
 
 5.times do
