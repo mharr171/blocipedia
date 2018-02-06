@@ -1,0 +1,18 @@
+<div>
+  <h4>Collaborators</h4>
+  <ul class='collaborators'>
+    <% @wiki.collaborators.each do |collaborator| %>
+    <li><%= collaborator.user.name %>
+      <span style='float:left; margin-right: 10px;'>
+        <%= link_to wiki_collaborator_path(@wiki,collaborator), class:'x-collab',method: :delete, data: {confirm: 'This will remove this collaborator. Would you like to continue?'} do %>
+          <i class="far fa-times-circle"></i>
+        <% end %>
+      </span>
+    </li>
+    <% end %>
+  </ul>
+
+  <br />
+  <%= link_to "Add Collaborator", new_wiki_collaborator_path(@wiki), class: 'btn btn-success' if @wiki.private %>
+
+</div>

@@ -1,15 +1,26 @@
-<h1>Edit "<%= @wiki.title %>"</h1>
+<% if @show %>
 
-<div class="row">
-  <div class="col-md-4">
-    <p>Guidelines for wikis</p>
-    <ul>
-      <li>Make it about a single topic.</li>
-      <li>Update with correct information to the best of your ability.</li>
-      <li>The incessant use of hashtags will get you banned.</li>
-    </ul>
+  <h1>Edit "<%= @wiki.title %>"</h1>
+
+  <div class="row">
+    <div class="col-md-4">
+      <p>Guidelines for wikis</p>
+      <ul>
+        <li>Make it about a single topic.</li>
+        <li>Update with correct information to the best of your ability.</li>
+        <li>The incessant use of hashtags will get you banned.</li>
+      </ul>
+    </div>
+    <div class="col-md-8">
+      <%= render partial: 'form', locals: { wiki: @wiki } %>
+    </div>
   </div>
-  <div class="col-md-8">
-    <%= render partial: 'form', locals: { wiki: @wiki } %>
+
+  <%= link_to "Add Collaborator", new_wiki_collaborator_path(@wiki), class: 'btn btn-success' if @wiki.private %>
+<% else %>
+  <div class="row">
+    <div class="col-md-12">
+      <%= render 'notfound' %>
+    </div>
   </div>
-</div>
+<% end %>

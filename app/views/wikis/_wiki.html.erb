@@ -1,16 +1,10 @@
-<% if ( wiki.private == false ) || ( policy(User).admin? || policy(User).premium? ) %>
   <div class="media">
     <div class="media-body">
       <h4 class="media-heading">
         <%= link_to wiki.title, wiki %>
       </h4>
       <small>
-        <% if wiki.private == false %>
-          <%= remove_markdown( (truncate wiki.body, length: 244) ) %>
-        <% else %>
-          <p>PRIVATE CONTENT.</p>
-        <% end %>
+        <%= remove_markdown( (truncate wiki.body, length: 140) ) %>
       </small>
     </div>
   </div>
-<% end %>

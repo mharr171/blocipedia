@@ -1,7 +1,7 @@
 require 'random_data'
 require 'faker'
-['standard', 'premium', 'admin'].each do |role|
-  Role.find_or_create_by({name: role})
+%w[standard premium admin].each do |role|
+  Role.find_or_create_by(name: role)
 end
 
 # Create My Account
@@ -49,9 +49,10 @@ admin_member.save!
 print '.'
 
 5.times do
+  n = Faker::Internet.user_name
   User.create!(
-    name:     Faker::Internet.user_name,
-    email:    Faker::Internet.safe_email,
+    name:     n,
+    email:    Faker::Internet.safe_email(n),
     password: Faker::Internet.password
   )
   print '.'
@@ -71,13 +72,19 @@ puts "\n#{User.count} users created"
 
   @u = users.sample
   @t = false
-  @t = true if ( @u.role_id == 2 || @u.role_id == 3 )
-  Wiki.create!(
+  @t = true if @u.role_id == 2 || @u.role_id == 3
+  w = Wiki.create!(
     title:    Faker::Vehicle.unique.manufacture.downcase.titleize,
     body:     @b.join(' '),
     private:  @t,
     user:     @u
   )
+  if w.private == true
+    w.collaborators << Collaborator.create!(
+      user: User.all.where(email: 'standard@blocipedia.com').first,
+      wiki: w
+    )
+  end
   print '.'
 end
 wikis = Wiki.all

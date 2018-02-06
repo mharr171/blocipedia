@@ -87,3 +87,19 @@ div.container {
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }
+
+.collaborators {
+  list-style-type: none;
+}
+
+.collaborators {
+  margin-left: -25px;
+}
+
+a.x-collab {
+  color: pink;
+}
+
+a.x-collab:hover {
+  color: red;
+}
