@@ -15,7 +15,14 @@
       <% end %>
       <br />
       <% if @wiki.private %>
-        <%= render 'collaborators' %>
+        <div>
+          <h4>Collaborators</h4>
+          <ul class='collaborators'>
+            <%= render partial: 'collaborators', collection: @wiki.collaborators %>
+          </ul>
+          <br />
+          <%= link_to "Add Collaborator", new_wiki_collaborator_path(@wiki), class: 'btn btn-success' if @wiki.private %>
+        </div>
       <% end %>
     </div>
   <% else %>

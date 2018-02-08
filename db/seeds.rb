@@ -4,6 +4,8 @@ require 'faker'
   Role.find_or_create_by(name: role)
 end
 
+Faker::Internet.unique.clear
+
 # Create My Account
 my_account = User.new(
   name:     'Matthew',
@@ -48,8 +50,8 @@ admin_member.skip_confirmation!
 admin_member.save!
 print '.'
 
-5.times do
-  n = Faker::Internet.user_name
+300.times do
+  n = Faker::Internet.unique.user_name
   User.create!(
     name:     n,
     email:    Faker::Internet.safe_email(n),
@@ -63,16 +65,19 @@ users = User.all
 puts "\n#{User.count} users created"
 
 # Create Wikis
+count = 0
 10.times do
+  count += 1
   @b = []
-  15.times do
+  5.times do
     @b << "\n" + Faker::Markdown.unique.headers + ' ' + Faker::Lorem.sentence + "\n"
     @b << Faker::Lorem.unique.paragraphs(2..8)
   end
 
   @u = users.sample
+  @u = users.where(email:'premium@blocipedia.com').first if (count%3 == 0)
   @t = false
-  @t = true if @u.role_id == 2 || @u.role_id == 3
+  @t = true if (count%3 == 0)
   w = Wiki.create!(
     title:    Faker::Vehicle.unique.manufacture.downcase.titleize,
     body:     @b.join(' '),

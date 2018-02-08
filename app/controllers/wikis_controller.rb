@@ -4,7 +4,7 @@ class WikisController < ApplicationController
   # after_action :verify_authorized
 
   def index
-    set_wikis
+    @wikis = policy_scope(Wiki)
   end
 
   def show
@@ -63,24 +63,6 @@ class WikisController < ApplicationController
 
   def wiki_params
     params.require(:wiki).permit(:title, :body, :private)
-  end
-
-  def set_wikis
-    temp_wikis = Wiki.all
-    @wikis = []
-    temp_wikis.each do |wiki|
-      if wiki.private == false
-        @wikis << wiki
-      elsif policy(User).admin?
-        @wikis << wiki
-      elsif wiki.user == current_user
-        @wikis << wiki
-      else
-        wiki.collaborators.each do |collab|
-          @wikis << wiki if collab.user == current_user
-        end
-      end
-    end
   end
 
   def set_show

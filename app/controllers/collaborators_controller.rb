@@ -1,14 +1,13 @@
 class CollaboratorsController < ApplicationController
+  before_action :set_wiki
+
   def new
-    @wiki = Wiki.find(params[:wiki_id])
     @collaborator = Collaborator.new
   end
 
   def create
-    @wiki = Wiki.find(params[:wiki_id])
     @collaborator = Collaborator.new
-    @collaborator.wiki_id = params[:wiki_id]
-    @collaborator.user_id = params[:collaborator][:user_id]
+    @collaborator = @wiki.collaborators.build(collaborator_params)
 
     if @collaborator.save
       flash[:notice] = 'Collaborator was saved.'
@@ -20,7 +19,6 @@ class CollaboratorsController < ApplicationController
   end
 
   def destroy
-    @wiki = Wiki.find(params[:wiki_id])
     @collaborator = Collaborator.find(params[:id])
     if @collaborator.destroy
       flash[:notice] = 'Collaborator removed'
@@ -29,5 +27,15 @@ class CollaboratorsController < ApplicationController
       flash.now[:alert] = 'Error'
       render :show
     end
+  end
+
+  private
+
+  def collaborator_params
+    params.require(:collaborator).permit(:collaborator, :user_id)
+  end
+
+  def set_wiki
+    @wiki = Wiki.find(params[:wiki_id])
   end
 end

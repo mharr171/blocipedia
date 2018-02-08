@@ -4,7 +4,7 @@
         <%= link_to wiki.title, wiki %>
       </h4>
       <small>
-        <%= remove_markdown( (truncate wiki.body, length: 140) ) %>
+        <%= remove_markdown(truncate(wiki.body, length: 140)) %>
       </small>
     </div>
   </div>
