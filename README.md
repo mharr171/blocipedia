@@ -1,24 +1,16 @@
-# README
+# Blocipedia
+Blocipedia is a Wikipedia replica built with Ruby on Rails. Blocipedia allows
+users to sign up, in, and out. All registered users may create public 'wikis'
+that can be viewed and edited by all other registered users. Users can also
+upgrade their accounts by paying via Stripe, giving them the ability to create
+private 'wikis' where they can curate a list of approved collaborators that may
+also edit their private 'wiki'. Blocipedia also comes with admin user abilities,
+giving admins access to manipulate all content on the site.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+![alt text](https://imgur.com/Zc0riHB.png "Blocipedia Screenshot")
 
-Things you may want to cover:
+![alt text](https://imgur.com/uluu4B1.png "Blocipedia Screenshot")
 
-* Ruby version
+![alt text](https://imgur.com/jqL0nwj.png "Blocipedia Screenshot")
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+![alt text](https://imgur.com/B89uhDf.png "Blocipedia Screenshot")
